@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    links:
+      - app
+    ports:
+      - "8990:80"
+      - "8443:443"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/log:/var/log/nginx
+  app:
+    container_name: app
+    build:
+      context: ./docker/php/
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./back:/var/www
+      - ./docker/php-ini:/usr/local/etc/php/custom.d
+    environment:
+      PHP_INT_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
+    working_dir: /var/www
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_DB: car_registration
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432" # Maps port 5433 on the host to port 5432 on the container
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
