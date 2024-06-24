@@ -14,14 +14,17 @@ class ReRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('ownerName')
-            ->add('registrationDate', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('car', EntityType::class, [
-                'class' => Car::class,
-                'choice_label' => 'id',
-            ])
+	        ->add('ownerName', null, [
+		        'label' => 'Имя владельца',
+		        'attr' => ['class' => 'form-control'],
+		        'label_attr' => ['class' => 'form-label'],
+	        ])
+	        ->add('number', null, [
+		        'label' => 'номер авто',
+		        'attr' => ['class' => 'form-control'],
+		        'label_attr' => ['class' => 'form-label'],
+	        ])
+
         ;
     }
 

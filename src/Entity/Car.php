@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\CarRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
+#[UniqueEntity(fields: ['number'], message: 'Этот номер уже существует')]
 class Car
 {
     #[ORM\Id]
@@ -22,8 +25,9 @@ class Car
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $model = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $number = null;
+	#[ORM\Column(type: 'string', length: 255, unique: true)]
+	#[Assert\NotBlank(message: 'Номер не должен быть пустым')]
+	private $number;
 
     public function getId(): ?int
     {

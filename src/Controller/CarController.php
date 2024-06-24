@@ -74,7 +74,7 @@ class CarController extends AbstractController
 		]);
 	}
 
-	#[Route('/cars', name: 'car_list')]
+	#[Route('/', name: 'car_list')]
 	public function list(EntityManagerInterface $em)
 	{
 		$cars = $em->getRepository(Car::class)->findAll();
