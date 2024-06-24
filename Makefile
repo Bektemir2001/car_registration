@@ -4,10 +4,6 @@ envPath=./.env
 tname =
 exec_in_app_container=docker compose exec app
 
-copy-env:
-	cp .env.example $(envPath)
-	@echo "Copied .env.example to .env"
-
 up:
 	docker compose up -d
 
