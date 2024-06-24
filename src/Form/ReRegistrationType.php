@@ -19,12 +19,14 @@ class ReRegistrationType extends AbstractType
 		        'attr' => ['class' => 'form-control'],
 		        'label_attr' => ['class' => 'form-label'],
 	        ])
-	        ->add('number', null, [
-		        'label' => 'номер авто',
+	        ->add('car', EntityType::class, [
+		        'class' => Car::class,
+		        'choice_label' => 'number',
+		        'label' => 'Номер авто',
 		        'attr' => ['class' => 'form-control'],
 		        'label_attr' => ['class' => 'form-label'],
+		        'placeholder' => 'Выберите номер авто', // Optional: Adds a placeholder
 	        ])
-
         ;
     }
 

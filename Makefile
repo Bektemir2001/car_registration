@@ -10,8 +10,8 @@ up:
 app: up
 	$(exec_in_app_container) composer install
 	$(exec_in_app_container) php bin/console doctrine:schema:drop --force
-	$(exec_in_app_container) php bin/console doctrine:migrations:migrate
 	$(exec_in_app_container) php bin/console make:migration
+	$(exec_in_app_container) php bin/console doctrine:migrations:migrate
 	$(exec_in_app_container) php bin/console cache:clear
 
 

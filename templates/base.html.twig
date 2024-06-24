@@ -13,13 +13,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('car_list') }}">Список авто</a>
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'car_list' %}active{% endif %}" aria-current="page" href="{{ path('car_list') }}">Список авто</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('car_register') }}">Первичная регистрация</a>
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'car_models' %}active{% endif %}" href="{{ path('car_models') }}">Список моделей</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('car_re_register') }}">Перерегистрация</a>
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'car_register' %}active{% endif %}" href="{{ path('car_register') }}">Первичная регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'car_re_register' %}active{% endif %}" href="{{ path('car_re_register') }}">Перерегистрация</a>
                     </li>
                 </ul>
             </div>

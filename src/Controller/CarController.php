@@ -24,7 +24,7 @@ class CarController extends AbstractController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
-			$car->setNumber(uniqid()); // Генерация уникального номера
+			$car->setNumber(uniqid());
 			$em->persist($car);
 			$em->flush();
 
@@ -52,12 +52,11 @@ class CarController extends AbstractController
 
 		if ($form->isSubmitted() && $form->isValid()) {
 			$data = $form->getData();
-			$car = $em->getRepository(Car::class)->findOneBy(['number' => $data['number']]);
+			$car = $data->getCar();
 
 			if ($car) {
-				$car->setOwnerName($data['ownerName']);
+				$car->setOwnerName($data->getOwnerName());
 				$em->flush();
-
 				$history = new OwnerHistory();
 				$history->setCar($car);
 				$history->setOwnerName($car->getOwnerName());

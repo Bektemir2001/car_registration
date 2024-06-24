@@ -26,7 +26,6 @@ class Car
     private ?string $model = null;
 
 	#[ORM\Column(type: 'string', length: 255, unique: true)]
-	#[Assert\NotBlank(message: 'Номер не должен быть пустым')]
 	private $number;
 
     public function getId(): ?int
@@ -82,9 +81,9 @@ class Car
         return $this->number;
     }
 
-    public function setNumber(string $number): static
+    public function setNumber(string|null $number): static
     {
-        $this->number = $number;
+        $this->number = uniqid();
 
         return $this;
     }

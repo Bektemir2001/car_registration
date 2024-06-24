@@ -2,9 +2,26 @@
 
 {% block body %}
     <h1>Список авто</h1>
-    <ul>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Номер авто</th>
+            <th scope="col">Владелец</th>
+            <th scope="col">Марка</th>
+            <th scope="col">Модель</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for car in cars %}
-            <li>{{ car.number }} - {{ car.ownerName }} - {{ car.brand }} {{ car.model }}</li>
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td><a href="{{ path('car_history',  { 'number': car.number }) }}">{{ car.number }}</a></td>
+                <td>{{ car.ownerName }}</td>
+                <td>{{ car.brand }}</td>
+                <td>{{ car.model }}</td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
 {% endblock %}
