@@ -2,9 +2,22 @@
 
 {% block body %}
     <h1>История владельцев для авто {{ car.number }}</h1>
-    <ul>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Владелец</th>
+            <th scope="col">Дата регистрации</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for history in history %}
-            <li>{{ history.ownerName }} - {{ history.registrationDate|date('Y-m-d') }}</li>
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ history.ownerName }}</td>
+                <td>{{ history.registrationDate|date('Y-m-d') }}</td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
 {% endblock %}
