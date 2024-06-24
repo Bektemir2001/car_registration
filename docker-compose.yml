@@ -1,11 +1,10 @@
 version: "3"
 
 services:
-
   nginx:
     container_name: nginx
     image: nginx:latest
-    links:
+    depends_on:
       - app
     ports:
       - "8990:80"
@@ -14,6 +13,9 @@ services:
       - .:/var/www
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
       - ./docker/nginx/log:/var/log/nginx
+    networks:
+      - app-network
+
   app:
     container_name: app
     build:
@@ -22,13 +24,15 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./back:/var/www
+      - .:/var/www
       - ./docker/php-ini:/usr/local/etc/php/custom.d
     environment:
       PHP_INT_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
     working_dir: /var/www
-    links:
+    depends_on:
       - postgres
+    networks:
+      - app-network
 
   postgres:
     image: postgres:13
@@ -40,7 +44,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432" # Maps port 5433 on the host to port 5432 on the container
+      - "5433:5432"
     networks:
       - app-network
 

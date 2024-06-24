@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>История владельцев для авто {{ car.number }}</h1>
+    <ul>
+        {% for history in history %}
+            <li>{{ history.ownerName }} - {{ history.registrationDate|date('Y-m-d') }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Список моделей</h1>
+    <ul>
+        {% for model in models %}
+            <li>{{ model.name }} - {{ model.count }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

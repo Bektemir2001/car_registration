@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Список авто</h1>
+    <ul>
+        {% for car in cars %}
+            <li>{{ car.number }} - {{ car.ownerName }} - {{ car.brand }} {{ car.model }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
